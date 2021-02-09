@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      database: user-authority
+      host: localhost
+      port: 11111
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
