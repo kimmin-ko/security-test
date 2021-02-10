@@ -1,9 +1,11 @@
 server:
   port: 8098
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format-sql: true
 
-spring:
-  data:
-    mongodb:
-      database: jwt-user-web
-      host: localhost
-      port: 0
+logging.level:
+  org.hibernate.SQL: debug

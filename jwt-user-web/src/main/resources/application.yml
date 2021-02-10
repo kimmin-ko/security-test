@@ -1,9 +1,2 @@
 server:
   port: 8098
-
-spring:
-  data:
-    mongodb:
-      database: jwt-user-web
-      host: localhost
-      port: 0
