@@ -21,4 +21,9 @@ public class Authority {
 
     private String email;
 
+    @Builder
+    public Authority(String authority, String email) {
+        this.authority = authority;
+        this.email = email;
+    }
 }

@@ -13,6 +13,7 @@ import java.util.Set;
 @Builder
 public class CustomUser implements UserDetails {
 
+    private Long userId;
     private String email;
     private String password;
 

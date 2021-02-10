@@ -31,6 +31,7 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updatedDate;
 
+    @Builder
     public User(String email, String name, String password) {
         this.email = email;
         this.name = name;
