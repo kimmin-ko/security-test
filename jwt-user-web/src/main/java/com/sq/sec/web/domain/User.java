@@ -1,5 +1,6 @@
 package com.sq.sec.web.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -22,6 +23,8 @@ public class User {
     @Column(unique = true)
     private String email;
     private String name;
+
+    @JsonIgnore
     private String password;
 
     @CreatedDate

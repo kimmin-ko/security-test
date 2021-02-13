@@ -26,4 +26,5 @@ public class Authority {
         this.authority = authority;
         this.email = email;
     }
+
 }

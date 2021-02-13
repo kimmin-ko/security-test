@@ -12,10 +12,16 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format-sql: true
 
 logging.level:
   org.hibernate.SQL: debug
+
+sp:
+  jwt:
+    secret: test-secret
+    token-life-time: 300
+    token-refresh-time: 86400

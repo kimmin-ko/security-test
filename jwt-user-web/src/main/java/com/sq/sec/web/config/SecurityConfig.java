@@ -1,12 +1,11 @@
 package com.sq.sec.web.config;
 
-import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sq.sec.web.security.CustomUserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -14,12 +13,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
-@RequiredArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CustomUserService customUserService;
     private final ObjectMapper objectMapper;
-    private final JWTUtil jwtUtil = new JWTUtil();
+    private final JWTUtil jwtUtil;
+
+    public SecurityConfig(CustomUserService customUserService, ObjectMapper objectMapper, JWTUtil jwtUtil) {
+        this.customUserService = customUserService;
+        this.objectMapper = objectMapper;
+        this.jwtUtil = jwtUtil;
+    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -39,12 +45,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        JWTLoginFilter jwtLoginFilter = new JWTLoginFilter(authenticationManager(), jwtUtil, objectMapper);
+        RefreshableLoginFilter jwtLoginFilter = new RefreshableLoginFilter(authenticationManager(), customUserService, jwtUtil, objectMapper);
+        JWTCheckFilter jwtCheckFilter = new JWTCheckFilter(authenticationManager(), customUserService, jwtUtil);
 
         http
                 .csrf().disable()
                 .addFilter(jwtLoginFilter)
-                ;
+                .addFilter(jwtCheckFilter)
+        ;
     }
 }
 

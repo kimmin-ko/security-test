@@ -44,4 +44,17 @@ public class CustomUserService implements UserDetailsService {
         return results;
     }
 
+        public CustomUser findUser(Long userId) {
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new UsernameNotFoundException(userId + "번 회원을 찾을 수 없습니다."));
+
+            return CustomUser.builder()
+                .userId(user.getId())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .authorities(getAuthorities(user.getEmail()))
+                .enabled(true)
+                .build();
+    }
+
 }
