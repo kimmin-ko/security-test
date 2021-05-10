@@ -42,7 +42,7 @@ public class UserService {
     }
 
     public void addAuthority(Long id, String role) {
-        User user = userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException(id + "버 회원이 존재하지 않습니다."));
+        User user = userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException(id + "번 회원이 존재하지 않습니다."));
 
         Authority authority = Authority.builder()
                 .email(user.getEmail())

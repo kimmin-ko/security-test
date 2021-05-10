@@ -35,6 +35,8 @@ public class JWTUtil {
                 .sign(algorithm);
     }
 
+    // access
+    // refresh
     private long getLifeTime(UserLogin.Type type) {
         switch (type) {
             case refresh:

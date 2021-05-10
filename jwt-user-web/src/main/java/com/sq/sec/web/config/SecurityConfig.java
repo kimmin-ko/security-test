@@ -45,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        RefreshableLoginFilter jwtLoginFilter = new RefreshableLoginFilter(authenticationManager(), customUserService, jwtUtil, objectMapper);
+//        RefreshableLoginFilter jwtLoginFilter = new RefreshableLoginFilter(authenticationManager(), customUserService, jwtUtil, objectMapper);
+        JWTLoginFilter jwtLoginFilter = new JWTLoginFilter(authenticationManager(), jwtUtil, objectMapper);
         JWTCheckFilter jwtCheckFilter = new JWTCheckFilter(authenticationManager(), customUserService, jwtUtil);
 
         http

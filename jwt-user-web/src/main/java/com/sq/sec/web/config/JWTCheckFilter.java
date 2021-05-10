@@ -1,6 +1,5 @@
 package com.sq.sec.web.config;
 
-import com.sq.sec.web.domain.User;
 import com.sq.sec.web.security.CustomUser;
 import com.sq.sec.web.security.CustomUserService;
 import org.springframework.security.authentication.AuthenticationManager;
